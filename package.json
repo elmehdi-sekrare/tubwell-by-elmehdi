@@ -1,0 +1,12 @@
+{
+  "name": "tubwell-by-elmehdi",
+  "private": true,
+  "description": "Tubwell: dog & cat grooming website with a pickup shop, booking form and page transitions (static, ready for Netlify).",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs 5332 site"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

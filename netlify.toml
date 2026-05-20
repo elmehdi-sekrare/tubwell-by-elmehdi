@@ -1,0 +1,27 @@
+# Deploys site/ as it is (no build). Netlify already does what the original host does:
+# /x → /x/ (pretty URLs) and 404.html for missing pages. Every page also has <meta name="robots" content="noindex">.
+# Site name to pick in Netlify: tubwell-by-elmehdi  → https://tubwell-by-elmehdi.netlify.app (the URL written in the pages).
+[build]
+  publish = "site"
+  command = ""
+  functions = "netlify/functions"
+
+# The booking and pickup-bag forms POST here (WordPress REST route on the original). A tiny function answers like the
+# original backend, so the forms show their "Thanks, …" screen. Nothing is stored or sent anywhere.
+[[redirects]]
+  from = "/wp-json/tubwell/v1/request"
+  to = "/.netlify/functions/request"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/wp-content/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
